@@ -6,12 +6,11 @@ import lombok.Setter;
 
 import javax.persistence.Embeddable;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @Embeddable
 public class Address {
-    private String Country;
-    private String City;
-    private String Street;
+    @Getter @Setter private String Country;
+    @Getter @Setter private String City;
+    @Getter @Setter private String Street;
 }

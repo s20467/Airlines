@@ -8,21 +8,55 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 public class Airport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Getter @Setter private Integer id;
 
     @Embedded
-    private Address address;
+    @Getter @Setter private Address address;
 
     @OneToMany(mappedBy = "airportFrom", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<ScheduledFlightLine> scheduledFlightLinesStartingHere;
+    private Set<ScheduledFlightLine> linesDepartingHere;
 
     @OneToMany(mappedBy = "airportTo", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<ScheduledFlightLine> scheduledFlightLinesArrivingHere;
+    private Set<ScheduledFlightLine> linesArrivingHere;
+
+    public ScheduledFlightLine[] getLinesDepartingHere() {
+        return linesDepartingHere.toArray(ScheduledFlightLine[]::new);
+    }
+
+    public void addLineDepartingHere(ScheduledFlightLine flightLine) {
+        if(flightLine == null || linesDepartingHere.contains(flightLine))
+            return;
+        linesDepartingHere.add(flightLine);
+        flightLine.setAirportFrom(this);
+    }
+
+    public void removeLineDepartingHere(ScheduledFlightLine flightLine) {
+        if(flightLine == null || !linesDepartingHere.contains(flightLine))
+            return;
+        linesDepartingHere.remove(flightLine);
+        flightLine.setAirportFrom(null);
+    }
+
+    public ScheduledFlightLine[] getLinesArrivingHere() {
+        return linesArrivingHere.toArray(ScheduledFlightLine[]::new);
+    }
+
+    public void addLineArrivingHere(ScheduledFlightLine flightLine) {
+        if(flightLine == null || linesArrivingHere.contains(flightLine))
+            return;
+        linesArrivingHere.add(flightLine);
+        flightLine.setAirportTo(this);
+    }
+
+    public void removeLineArrivingHere(ScheduledFlightLine flightLine) {
+        if(flightLine == null || !linesArrivingHere.contains(flightLine))
+            return;
+        linesArrivingHere.remove(flightLine);
+        flightLine.setAirportTo(this);
+    }
 }

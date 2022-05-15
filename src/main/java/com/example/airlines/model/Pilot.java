@@ -11,17 +11,43 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 public class Pilot extends Employee {
 
-    private LocalDate certificationObtainingDate;
+    @Getter @Setter private LocalDate certificationObtainingDate;
 
     @OneToMany(mappedBy = "primaryPilot", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<ScheduledFlightLine> scheduledFlightLinesAsPrimary;
+    private Set<ScheduledFlightLine> flightLinesAsPrimary;
 
     @OneToMany(mappedBy = "secondaryPilot", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<ScheduledFlightLine> scheduledFlightLinesAsSecondary;
+    private Set<ScheduledFlightLine> flightLinesAsSecondary;
+
+    public void addFlightLineAsPrimary(ScheduledFlightLine flightLine) {
+        if(flightLine == null || flightLinesAsPrimary.contains(flightLine))
+            return;
+        flightLinesAsPrimary.add(flightLine);
+        flightLine.setPrimaryPilot(this);
+    }
+
+    public void removeFlightLineAsPrimary(ScheduledFlightLine flightLine) {
+        if(flightLine == null || !flightLinesAsPrimary.contains(flightLine))
+            return;
+        flightLinesAsPrimary.remove(flightLine);
+        flightLine.setPrimaryPilot(null);
+    }
+
+    public void addFlightLineAsSecondary(ScheduledFlightLine flightLine) {
+        if(flightLine == null || flightLinesAsSecondary.contains(flightLine))
+            return;
+        flightLinesAsSecondary.add(flightLine);
+        flightLine.setSecondaryPilot(this);
+    }
+
+    public void removeFlightLineAsSecondary(ScheduledFlightLine flightLine) {
+        if(flightLine == null || !flightLinesAsSecondary.contains(flightLine))
+            return;
+        flightLinesAsSecondary.remove(flightLine);
+        flightLine.setSecondaryPilot(null);
+    }
 
 }

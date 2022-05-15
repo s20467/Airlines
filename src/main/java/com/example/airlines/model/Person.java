@@ -7,20 +7,18 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @MappedSuperclass
-@Getter
-@Setter
 public abstract class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+    @Getter @Setter protected Integer id;
 
-    protected String firstName;
-    protected String lastName;
-    protected String telephoneNumber;
-    protected String username;
-    protected String password;
+    @Getter @Setter protected String firstName;
+    @Getter @Setter protected String lastName;
+    @Getter @Setter protected String telephoneNumber;
+    @Getter @Setter protected String username;
+    @Getter @Setter protected String password;
 
     @Embedded
-    private Address address;
+    @Getter @Setter private Address address;
 }

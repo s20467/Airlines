@@ -1,5 +1,8 @@
 package com.example.airlines.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -8,13 +11,13 @@ public abstract class FlightBooking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Getter @Setter private Integer id;
 
     @Enumerated(value = EnumType.STRING)
-    private BookingStatus status;
+    @Getter @Setter private BookingStatus status;
 
-    private LocalDateTime creationTime;
+    @Getter @Setter private LocalDateTime creationTime;
 
-    private LocalDateTime cancellingTime;
+    @Getter @Setter private LocalDateTime cancellingTime;
 
 }

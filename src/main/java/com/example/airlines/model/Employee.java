@@ -7,11 +7,9 @@ import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
 public class Employee extends Person {
 
-    private LocalDate hireDate;
-    private LocalDate dismissalDate;
-    private Double monthSalary; //todo change double into BigDecimal/Monetary
+    @Getter @Setter private LocalDate hireDate;
+    @Getter @Setter private LocalDate dismissalDate;
+    @Getter @Setter private Double monthSalary; //todo change double into BigDecimal/Monetary
 }
