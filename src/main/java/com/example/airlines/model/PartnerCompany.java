@@ -23,6 +23,9 @@ public class PartnerCompany {
     @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     private Set<TransportFlightBooking> bookings;
 
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+    @Getter private Account account;
+
     public TransportFlightBooking[] getBookings() {
         return bookings.toArray(TransportFlightBooking[]::new);
     }
@@ -39,5 +42,20 @@ public class PartnerCompany {
             return;
         bookings.remove(booking);
         booking.setCompany(null);
+    }
+
+    public void setAccount(Account account) throws WrongAccountOwnerType {
+        if(this.account == account) {
+            return;
+        }
+        else if(account != null) {
+            account.setCompanyOwner(this);
+            this.account = account;
+        }
+        else {
+            Account tmpAccount = this.account;
+            this.account = null;
+            tmpAccount.resetOwner();
+        }
     }
 }

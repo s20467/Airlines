@@ -2,10 +2,12 @@ package com.example.airlines.model;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
 @MappedSuperclass
 public abstract class Person {
 
@@ -16,8 +18,6 @@ public abstract class Person {
     @Getter @Setter protected String firstName;
     @Getter @Setter protected String lastName;
     @Getter @Setter protected String telephoneNumber;
-    @Getter @Setter protected String username;
-    @Getter @Setter protected String password;
 
     @Embedded
     @Getter @Setter private Address address;

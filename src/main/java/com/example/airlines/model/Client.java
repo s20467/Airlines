@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.Set;
 
 @Entity
@@ -17,6 +18,9 @@ public class Client extends Person {
 
     @OneToMany(mappedBy = "passengerClient", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     private Set<PassengerFlightBooking> bookings;
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+    @Getter private Account account;
 
     public PassengerFlightBooking[] getBookings() {
         return bookings.toArray(PassengerFlightBooking[]::new);
@@ -34,5 +38,20 @@ public class Client extends Person {
             return;
         bookings.remove(booking);
         booking.setPassengerClient(null);
+    }
+
+    public void setAccount(Account account) throws WrongAccountOwnerType {
+        if(this.account == account) {
+            return;
+        }
+        else if(account != null) {
+            account.setClientOwner(this);
+            this.account = account;
+        }
+        else {
+            Account tmpAccount = this.account;
+            this.account = null;
+            tmpAccount.resetOwner();
+        }
     }
 }
