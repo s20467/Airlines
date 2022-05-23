@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,7 +25,7 @@ public abstract class ScheduledFlightLine {
             name = "SCHEDULED_FLIGHT_LINE_DAY_OF_WEEK",
             joinColumns = @JoinColumn(name = "SCHEDULED_FLIGHT_LINE_ID")
     )
-    private Set<DayOfWeek> flightDays;
+    private Set<DayOfWeek> flightDays = new HashSet<>();
     @Getter @Setter private LocalTime departureTime;
     @Getter @Setter private LocalTime arrivalTime;
 

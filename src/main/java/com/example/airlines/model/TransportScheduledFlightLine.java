@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,7 +20,7 @@ public class TransportScheduledFlightLine extends ScheduledFlightLine {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @Getter private Account account;
     @OneToMany(mappedBy = "flightLine", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<TransportFlight> flights;
+    private Set<TransportFlight> flights = new HashSet<>();
 
     public TransportFlight[] getFlights() {
         return flights.toArray(TransportFlight[]::new);

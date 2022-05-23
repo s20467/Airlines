@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,7 @@ public class TransportFlight {
     @Getter private TransportScheduledFlightLine flightLine;
 
     @OneToMany(mappedBy = "flight", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<TransportFlightBooking> bookings;
+    private Set<TransportFlightBooking> bookings = new HashSet<>();
 
     public void setFlightLine(TransportScheduledFlightLine flightLine) {
         if(this.flightLine == flightLine) {

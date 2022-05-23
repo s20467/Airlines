@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,10 +18,10 @@ public class Pilot extends Employee {
     @Getter @Setter private LocalDate certificationObtainingDate;
 
     @OneToMany(mappedBy = "primaryPilot", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<ScheduledFlightLine> flightLinesAsPrimary;
+    private Set<ScheduledFlightLine> flightLinesAsPrimary = new HashSet<>();
 
     @OneToMany(mappedBy = "secondaryPilot", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<ScheduledFlightLine> flightLinesAsSecondary;
+    private Set<ScheduledFlightLine> flightLinesAsSecondary = new HashSet<>();
 
     public void addFlightLineAsPrimary(ScheduledFlightLine flightLine) {
         if(flightLine == null || flightLinesAsPrimary.contains(flightLine))

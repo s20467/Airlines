@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,10 +20,10 @@ public class Airport {
     @Getter @Setter private Address address;
 
     @OneToMany(mappedBy = "airportFrom", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<ScheduledFlightLine> linesDepartingHere;
+    private Set<ScheduledFlightLine> linesDepartingHere = new HashSet<>();
 
     @OneToMany(mappedBy = "airportTo", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<ScheduledFlightLine> linesArrivingHere;
+    private Set<ScheduledFlightLine> linesArrivingHere = new HashSet<>();
 
     public ScheduledFlightLine[] getLinesDepartingHere() {
         return linesDepartingHere.toArray(ScheduledFlightLine[]::new);

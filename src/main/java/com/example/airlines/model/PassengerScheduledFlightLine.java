@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ public class PassengerScheduledFlightLine extends ScheduledFlightLine {
     @Getter @Setter private Double costInDollars;
 
     @OneToMany(mappedBy = "flightLine", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
-    private Set<PassengerFlight> flights;
+    private Set<PassengerFlight> flights = new HashSet<>();
 
     public PassengerFlight[] getFlights() {
         return flights.toArray(PassengerFlight[]::new);
