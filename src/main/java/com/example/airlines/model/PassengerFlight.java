@@ -20,7 +20,7 @@ public class PassengerFlight {
     @Getter @Setter private LocalDate date;
 
     @Enumerated(EnumType.STRING)
-    @Getter private FlightStatus status;
+    @Getter private FlightStatus status = FlightStatus.PLANNED;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @Getter private PassengerScheduledFlightLine flightLine;

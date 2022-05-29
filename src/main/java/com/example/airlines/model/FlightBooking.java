@@ -14,7 +14,7 @@ public abstract class FlightBooking {
     @Getter @Setter private Integer id;
 
     @Enumerated(value = EnumType.STRING)
-    @Getter @Setter private BookingStatus status;
+    @Getter @Setter private BookingStatus status = BookingStatus.BOUGHT;
 
     @Getter @Setter private LocalDateTime creationTime;
 
