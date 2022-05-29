@@ -20,13 +20,26 @@ public class TransportFlight {
     @Getter @Setter private LocalDate date;
 
     @Enumerated(EnumType.STRING)
-    @Getter @Setter private FlightStatus status;
+    @Getter private FlightStatus status;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @Getter private TransportScheduledFlightLine flightLine;
 
     @OneToMany(mappedBy = "flight", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     private Set<TransportFlightBooking> bookings = new HashSet<>();
+
+    public void setStatus(FlightStatus status) {
+        if(status == FlightStatus.CANCELLED){
+            bookings.forEach((TransportFlightBooking booking) -> {
+                booking.setStatus(BookingStatus.CANCELLED);
+            });
+        }
+        else if(status == FlightStatus.DONE){
+            bookings.forEach((TransportFlightBooking booking) -> {
+                booking.setStatus(BookingStatus.REALIZED);
+            });
+        }
+    }
 
     public void setFlightLine(TransportScheduledFlightLine flightLine) {
         if(this.flightLine == flightLine) {
