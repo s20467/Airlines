@@ -14,7 +14,6 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter protected Integer id;
 
-    @Getter @Setter private String username;
     @Getter @Setter private String password;
 
     @Getter @Setter private AccountOwnerType ownerType = AccountOwnerType.NONE;
