@@ -52,8 +52,8 @@ public class PartnerCompany {
             return;
         }
         else if(account != null) {
-            account.setCompanyOwner(this);
             this.account = account;
+            account.setCompanyOwner(this);
         }
         else {
             Account tmpAccount = this.account;

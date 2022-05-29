@@ -19,8 +19,8 @@ public class AdministrationEmployee extends Employee {
             return;
         }
         else if(account != null) {
-            account.setAdministrationEmployeeOwner(this);
             this.account = account;
+            account.setAdministrationEmployeeOwner(this);
         }
         else {
             Account tmpAccount = this.account;

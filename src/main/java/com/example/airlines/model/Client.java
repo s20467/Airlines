@@ -46,8 +46,8 @@ public class Client extends Person {
             return;
         }
         else if(account != null) {
-            account.setClientOwner(this);
             this.account = account;
+            account.setClientOwner(this);
         }
         else {
             Account tmpAccount = this.account;
