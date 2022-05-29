@@ -20,7 +20,7 @@ public class Client extends Person {
     @OneToMany(mappedBy = "passengerClient", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     private Set<PassengerFlightBooking> bookings = new HashSet<>();
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE})
     @Getter private Account account;
 
     public PassengerFlightBooking[] getBookings() {

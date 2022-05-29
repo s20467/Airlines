@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 @Entity
 @NoArgsConstructor
 public class AdministrationEmployee extends Employee {
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE})
     @Getter private Account account;
 
     public void setAccount(Account account) throws WrongAccountOwnerType {

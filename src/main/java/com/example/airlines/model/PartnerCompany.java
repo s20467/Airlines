@@ -21,10 +21,12 @@ public class PartnerCompany {
     @Embedded
     @Getter @Setter private Address address;
 
+    @Getter @Setter private String email;
+
     @OneToMany(mappedBy = "company", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     private Set<TransportFlightBooking> bookings = new HashSet<>();
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE})
     @Getter private Account account;
 
     public TransportFlightBooking[] getBookings() {
