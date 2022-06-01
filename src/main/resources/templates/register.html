@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Register</title>
+</head>
+<body>
+    <div th:replace="fragments/header :: header">header</div>
+    <div class="d-flex flex-column w-50 mx-auto">
+        <h1 class="mt-4">Rejestracja konta</h1>
+        <form th:action="@{/register}" method="post" th:object="${registerCommand}">
+            <div class="mt-4">
+                <label for="email" class="form-label">Email</label>
+                <input th:field="*{email}" id="email" type="text" name="email" class="form-control" placeholder="Email" required autofocus>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}">
+                       <ul>
+                           <li th:each="error : ${#fields.errors('email')}" th:text="${error}" />
+                       </ul>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label for="firstName" class="form-label">Imię</label>
+                <input th:field="*{firstName}" id="firstName" type="text" name="firstName" class="form-control" placeholder="Imię" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('firstName')}" th:text="${error}" />
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label for="lastName" class="form-label">Nazwisko</label>
+                <input th:field="*{lastName}" id="lastName" type="text" name="lastName" class="form-control" placeholder="Nazwisko" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('lastName')}" th:text="${error}" />
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label for="password" class="form-label">Hasło</label>
+                <input th:field="*{password}" id="password" type="password" name="password" class="form-control" placeholder="Hasło" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('password')}" th:text="${error}" />
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label for="country" class="form-label">Kraj</label>
+                <input th:field="*{country}" id="country" type="text" name="country" class="form-control" placeholder="Kraj" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('country')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('country')}" th:text="${error}" />
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label for="city" class="form-label">Miasto</label>
+                <input th:field="*{city}" id="city" type="text" name="city" class="form-control" placeholder="Miasto" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('city')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('city')}" th:text="${error}" />
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label for="street" class="form-label">Ulica</label>
+                <input th:field="*{street}" id="street" type="text" name="street" class="form-control" placeholder="Ulica" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('street')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('street')}" th:text="${error}" />
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label for="telephoneNumber" class="form-label">Nr telefonu</label>
+                <input th:field="*{telephoneNumber}" id="telephoneNumber" type="text" name="telephoneNumber" class="form-control" placeholder="Nr telefonu" required>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('telephoneNumber')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('telephoneNumber')}" th:text="${error}" />
+                    </ul>
+                </div>
+            </div>
+            <button th:type="submit" class="btn btn-primary mt-4 w-100">Zarejestruj się</button>
+        </form>
+    </div>
+</body>
+</html>

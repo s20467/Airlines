@@ -39,6 +39,7 @@ public class PassengerFlight {
                 booking.setStatus(BookingStatus.REALIZED);
             });
         }
+        this.status = status;
     }
 
     public void setFlightLine(PassengerScheduledFlightLine flightLine) {
