@@ -30,6 +30,7 @@ alter table transport_flight_booking add constraint transport_flight_transport_f
 insert into account (id, email, password, owner_type, role) values (default, 'jannowak@email.com', '$2a$10$taRYZILsD1.n4EaXHiBcN.QYl6fI2pVxKXoCmHHUhDJCltGySgvZ6', 0, 0);
 insert into client (id, first_name, last_name, country, city, street, telephone_number, account_id) values (default, 'Jan', 'Nowak', 'Polska', 'Warszawa', 'ulica', '222222222', 1);
 insert into account (id, email, password, owner_type, role) values (default, 'johnsmith@email.com', '$2a$10$31jziauLVcsa5RSDEb1OB.r.XVJpc7IiGuZsl6VQ4IfEOcReVoq5S', 0, 0);
+insert into account (id, email, password, owner_type, role) values (default, 'admin', '$2a$10$31jziauLVcsa5RSDEb1OB.r.XVJpc7IiGuZsl6VQ4IfEOcReVoq5S', null, 3);
 insert into client (id, first_name, last_name, country, city, street, telephone_number, account_id) values (default, 'John', 'Smith', 'Polska', 'Warszawa', 'ulica', '333333333', 2);
 insert into airplane (id, brand, model, last_technical_review_date, max_cargo_weight_in_kg, max_passengers_number) values (default, 'Boeing', '737-800', '2022-06-01', 50000, 500);
 insert into airport (id, city, country, street) values (default, 'Polska', 'Wrocław', 'Graniczna 190');
