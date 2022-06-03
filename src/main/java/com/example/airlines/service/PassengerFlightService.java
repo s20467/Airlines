@@ -20,4 +20,6 @@ public interface PassengerFlightService {
     List<PassengerFlightBooking> getBookingsByAccount(Account account);
 
     void cancelBooking(Integer bookingId);
+
+    List<PassengerFlightBooking> getBookingsByClientId(Integer clientId);
 }
