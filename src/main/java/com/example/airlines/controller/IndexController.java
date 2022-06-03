@@ -2,6 +2,7 @@ package com.example.airlines.controller;
 
 import com.example.airlines.model.Account;
 import com.example.airlines.model.PassengerFlight;
+import com.example.airlines.service.ClientService;
 import com.example.airlines.service.PassengerFlightService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +22,7 @@ import java.util.List;
 public class IndexController {
 
     private final PassengerFlightService passengerFlightService;
+    private final ClientService clientService;
 
     @PermitAll
     @RequestMapping({"passenger-flights", ""})
@@ -56,8 +58,24 @@ public class IndexController {
     @PreAuthorize("hasAuthority('ADMIN') or " +
             "hasAuthority('CLIENT') and @customAuthenticationManager.userMatchesBasedOnBookingId(authentication, #bookingId)")
     @PostMapping("/passenger-flights/bookings/{bookingId}/cancel")
-    public String cancelBooking(@PathVariable Integer bookingId) {
+    public String cancelBooking(@PathVariable Integer bookingId, Model model) {
         passengerFlightService.cancelBooking(bookingId);
+        model.addAttribute("clientId", passengerFlightService.getClientIdByBookingId(bookingId));
         return "booking_cancelled_success";
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("clients")
+    public String getUsers(Model model) {
+        model.addAttribute("clients", clientService.getClients());
+        return "clients";
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("clients/{clientId}/bookings")
+    public String getUsersBookings(@PathVariable Integer clientId, Model model) {
+        model.addAttribute("client", clientService.getById(clientId));
+        model.addAttribute("bookings", passengerFlightService.getBookingsByClientId(clientId));
+        return "passenger_bookings";
     }
 }

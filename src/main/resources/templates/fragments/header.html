@@ -10,6 +10,7 @@
         <div class="d-flex">
             <a href="/" class="text-decoration-none text-reset align-self-center"><h3>Linie Lotnicze</h3></a>
             <a sec:authorize="hasAuthority('CLIENT')" href="/passenger-flights/my-bookings" class="text-decoration-none text-reset align-self-center ms-4">Moje rezerwacje</a>
+            <a sec:authorize="hasAuthority('ADMIN')" href="/clients" class="text-decoration-none text-reset align-self-center ms-4">Klienci</a>
         </div>
         <a sec:authorize="isAnonymous()" href="/login"><button class="btn btn-primary">Zaloguj się</button></a>
         <a sec:authorize="isAuthenticated()" href="/logout"><button class="btn btn-primary">Wyloguj się</button></a>
