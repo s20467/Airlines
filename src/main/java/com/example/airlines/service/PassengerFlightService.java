@@ -22,4 +22,6 @@ public interface PassengerFlightService {
     void cancelBooking(Integer bookingId);
 
     List<PassengerFlightBooking> getBookingsByClientId(Integer clientId);
+
+    Integer getClientIdByBookingId(Integer bookingId);
 }

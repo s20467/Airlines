@@ -62,6 +62,13 @@ public class PassengerFlightServiceImpl implements PassengerFlightService {
     }
 
     @Override
+    public Integer getClientIdByBookingId(Integer bookingId) {
+        return passengerFlightBookingRepository.findById(bookingId).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Booking with id: " + bookingId + " not found")
+        ).getPassengerClient().getId();
+    }
+
+    @Override
     public void cancelBooking(Integer bookingId) {
         PassengerFlightBooking booking = passengerFlightBookingRepository.findById(bookingId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         booking.setStatus(BookingStatus.CANCELLED);
